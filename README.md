@@ -1,2 +1,4 @@
 # crystall-structure-SPI1-
-here in this repsository  i am trying to stimulate the crystall structure stating from lattice generation to  surface ny use of python and its library 
+Here in this repsository  I am trying to simulate the crystall structure starting from lattice generation to  surface by use of python and its library .
+<br>
+Author-Vinit gupta
