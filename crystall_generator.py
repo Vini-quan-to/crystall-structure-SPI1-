@@ -125,3 +125,4 @@ elif type=="all":
 
 
 print("thank you for using the lattice generator  in PSI1")
+print(" I have made changes from the phone ")
