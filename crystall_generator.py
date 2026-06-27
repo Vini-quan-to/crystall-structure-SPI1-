@@ -197,4 +197,6 @@ s=fig.add_subplot(111, projection='3d')
 s.scatter(basis1_x,basis1_y,basis1_z, color="blue", marker="o" ,markersize=10 ,markercolor="red")
 s.scatter(basis2_x,basis2_y,basis2_z,color="red", marker="o" ,markersize=10 ,markercolor="blue")
 mp.show()
- 
+
+
+print("updates are pending to come so lets wait")
