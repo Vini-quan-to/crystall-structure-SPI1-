@@ -137,6 +137,8 @@ print("NOTE- THIS TO INFORM  YOU THAT FOR OUR SIMPLICITY WE HAVE WRITTEN X Y Z  
 basis=[]
 cl=[]
 lp=[]
+rlv=[]
+rlp=[]
 basis1_x=[]
 basis1_y=[]
 basis1_z=[]
@@ -149,6 +151,8 @@ n1=int(input("enter the number of lattice points in  the x direction:"))
 n2=int(input("enter the number of lattice points in  the y direction:"))    
 n3=int(input("enter the number of lattice points in  the z direction:")) 
 print("Enter your lattice vector ")
+
+
 for i in range(3):
     ax=int(input("enter the x-direction of your lattice vector:  "))
     ay=int(input("enter the y-direction of your lattice vector:  "))
@@ -157,6 +161,8 @@ for i in range(3):
     print(f'your given lattice vector {a1} is stored in the system')
     cl.append(a1)
 print(f' These are all the lattice vector given as input {cl}')
+
+
 
 number_basis=int(input("enter the number of basis atom in the crystall:"))
 for i in range(number_basis):
@@ -168,6 +174,19 @@ for i in range(number_basis):
     basis.append(b1)
 print(f' These are all the basis given as input {basis}')
 
+a1=cl[0]
+a2=cl[1]
+a3=cl[2]
+z=np.cross(a2, a3)
+v=np.dot(a1, z)
+b1=(2*np.pi*z)/v
+b2=(2*np.pi*(np.cross(a1,a3)))/v
+b3=(2*np.pi*(np.cross(a1,a2)))/v
+
+rlv.append(b1)
+rlv.append(b2)
+rlv.append(b3)
+print(f" this are  your reciprocal lattice vector formed from the  given primitibe attice vector {rlv}")
 
 
 for n in range(n1):
@@ -176,6 +195,9 @@ for n in range(n1):
                     
             r=(n*cl[0] + m*cl[1] + p*cl[2])
             lp.append(r)
+            g=n1*b1+n2*b2+n3*b3
+            m=np.exp(1j*(np.dot(g,r)))
+            rlp.append(m)
             
             for j in range(number_basis):
                     if j==0:
@@ -200,3 +222,6 @@ mp.show()
 
 
 print("updates are pending to come so lets wait")
+
+
+
