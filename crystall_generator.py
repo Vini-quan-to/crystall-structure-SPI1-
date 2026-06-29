@@ -191,11 +191,11 @@ for n in range(n1):
                          basis2_z.append(r1[2])
 print(lp)
 from mpl_toolkits.mplot3d import Axes3D
-fig = mp.figure(figsize=(6,6))
+fig = mp.figure(figsize=(8,8))
 
 s=fig.add_subplot(111, projection='3d')
-s.scatter(basis1_x,basis1_y,basis1_z, color="blue", marker="o" ,markersize=10 ,markercolor="red")
-s.scatter(basis2_x,basis2_y,basis2_z,color="red", marker="o" ,markersize=10 ,markercolor="blue")
+s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=50)
+s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)
 mp.show()
 
 
