@@ -222,6 +222,7 @@ mp.show()
 
 
 print("updates are pending to come so lets wait")
+print("gt problem solved")
 
 
 
