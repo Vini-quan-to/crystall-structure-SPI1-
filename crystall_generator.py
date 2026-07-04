@@ -69,7 +69,7 @@ a3=cl[2]
 z=np.cross(a2, a3)
 v=np.dot(a1, z)
 b1=(2*np.pi*z)/v
-b2=(2*np.pi*(np.cross(a1,a3)))/v
+b2=(2*np.pi*(np.cross(a3,a1)))/v
 b3=(2*np.pi*(np.cross(a1,a2)))/v
 
 rlv.append(b1)
@@ -78,35 +78,40 @@ rlv.append(b3)
 print(f" this are  your reciprocal lattice vector formed from the  given primitibe attice vector {rlv}")
 
 # Condtion used for  the lattice point generation  with the given basis as well
+for j in range(number_basis):
+    for n in range(n1):
+        for m in range(n2):
+            for p in range(n3):
+                        
+                # r=(n*cl[0] + m*cl[1] + p*cl[2])
+                # lp.append(r)
+                r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
+                basis1_x.append(r1[0])
+                basis1_y.append(r1[1])
+                basis1_z.append(r1[2])
+                g=(h*b1 + k*b2 + l*b3)
+                d=np.dot(g,r1)
+                constant.append(d)
+                            
 
-for n in range(n1):
-    for m in range(n2):
-        for p in range(n3):
-                    
-            r=(n*cl[0] + m*cl[1] + p*cl[2])
-            lp.append(r)
-        
-            for j in range(number_basis):
-                    if j==0:
-                         
-                        r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
-                        basis1_x.append(r1[0])
-                        basis1_y.append(r1[1])
-                        basis1_z.append(r1[2])
-                        g=(h*b1 + k*b2 + l*b3)
-                        d=np.dot(g,r1)
-                        constant.append(d)
+            
+                # for j in range(number_basis):
+                #         if j==0:
+                            
+                #             r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
+                #             basis1_x.append(r1[0])
+                #             basis1_y.append(r1[1])
+                #             basis1_z.append(r1[2])
+                            
 
-                    else:
-                         r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
-                         basis2_x.append(r1[0])
-                         basis2_y.append(r1[1])
-                         basis2_z.append(r1[2])
-                         g=(h*b1 + k*b2 + l*b3)
-                         d=np.dot(g,r1)
-                         constant.append(d)
-print(d)             
-print(lp)
+                #         else:
+                #              r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
+                #              basis2_x.append(r1[0])
+                #              basis2_y.append(r1[1])
+                #              basis2_z.append(r1[2])
+            
+print(f' these are the constant for each layers  {constant}')             
+# print(lp)
 
 
 # PLOT FOR THE LATTICE POINTS
@@ -116,7 +121,7 @@ fig = mp.figure(figsize=(8,8))
 
 s=fig.add_subplot(111, projection='3d')
 s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
-s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
+# s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
 mp.show()
 
     
