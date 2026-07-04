@@ -10,10 +10,10 @@ name=input("enter you good name pls:")
 print(f"welcome {name} generate your own world of crystalls")
 print("NOTE- THIS TO INFORM  YOU THAT FOR OUR SIMPLICITY WE HAVE WRITTEN X Y Z  FOR  THE DIRECTION BUT BASED ON  THE INPUT ANY LATTICE WITH THE BASIS CAN BE CREATED ")
 basis=[]
-cl=[]
-lp=[]
-rlv=[]
-rlp=[]
+cl=[]                                         #crystall lattice vector
+lp=[]                                         # lattice points 
+rlv=[]                                        # relative lattice vector
+rlp=[]                                        # reciprocal lattice point
 basis1_x=[]
 basis1_y=[]
 basis1_z=[]
@@ -21,6 +21,8 @@ basis1_z=[]
 basis2_x=[]
 basis2_y=[]
 basis2_z=[]
+constant=[]      # constant for the atom belonging the same layer
+
 
 # INPUT FOR THE LATTICE CONSTANT AND THE NUMBER OF LATTICE POINTS IN THE X Y Z DIRECTION
 a=float(input("enter the lattice constant a :"))
@@ -91,13 +93,23 @@ for n in range(n1):
                         basis1_x.append(r1[0])
                         basis1_y.append(r1[1])
                         basis1_z.append(r1[2])
+                        g=(h*b1 + k*b2 + l*b3)
+                        d=np.dot(g,r1)
+                        constant.append(d)
+
                     else:
                          r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
                          basis2_x.append(r1[0])
                          basis2_y.append(r1[1])
                          basis2_z.append(r1[2])
+                         g=(h*b1 + k*b2 + l*b3)
+                         d=np.dot(g,r1)
+                         constant.append(d)
+print(d)             
 print(lp)
 
+
+# PLOT FOR THE LATTICE POINTS
 
 from mpl_toolkits.mplot3d import Axes3D
 fig = mp.figure(figsize=(8,8))
@@ -106,6 +118,8 @@ s=fig.add_subplot(111, projection='3d')
 s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
 s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
 mp.show()
+
+    
 
 
 
