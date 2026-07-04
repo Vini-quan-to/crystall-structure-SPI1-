@@ -21,7 +21,7 @@ basis1_z=[]
 basis2_x=[]
 basis2_y=[]
 basis2_z=[]
-constant=[]      # constant for the atom belonging the same layer
+constant={}      # constant for the atom belonging the same layer
 
 
 # INPUT FOR THE LATTICE CONSTANT AND THE NUMBER OF LATTICE POINTS IN THE X Y Z DIRECTION
@@ -91,9 +91,22 @@ for j in range(number_basis):
                 basis1_z.append(r1[2])
                 g=(h*b1 + k*b2 + l*b3)
                 d=np.dot(g,r1)
-                constant.append(d)
-                            
+                constant.update(d)
+                layers={}
+                d=np.dot(g,r1)
 
+                # d=round(d,5)
+
+                # if d not in layers:
+                #     layers[d]=[]
+
+                # layers[d].append(r1)
+
+                # for key,value in layers.items():
+                #     print("layer:",key)
+                #     print(value)
+                            
+            
             
                 # for j in range(number_basis):
                 #         if j==0:
@@ -111,7 +124,20 @@ for j in range(number_basis):
                 #              basis2_z.append(r1[2])
             
 print(f' these are the constant for each layers  {constant}')             
-# print(lp)
+
+print(layers.keys())
+layer_atoms = np.array(layers[0])
+y = layer_atoms[:,1]
+z = layer_atoms[:,2]
+
+mp.scatter(y,z)
+mp.xlabel("y")
+mp.ylabel("z")
+mp.show()
+
+
+
+
 
 
 # PLOT FOR THE LATTICE POINTS
