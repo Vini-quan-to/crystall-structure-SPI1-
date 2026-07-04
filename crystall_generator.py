@@ -195,8 +195,8 @@ for n in range(n1):
                     
             r=(n*cl[0] + m*cl[1] + p*cl[2])
             lp.append(r)
-            g=n1*b1+n2*b2+n3*b3
-            m=np.exp(1j*(np.dot(g,r)))
+            # g=n1*b1+n2*b2+n3*b3
+            # m=np.exp(1j*(np.dot(g,r)))
             rlp.append(m)
             
             for j in range(number_basis):
@@ -216,7 +216,7 @@ from mpl_toolkits.mplot3d import Axes3D
 fig = mp.figure(figsize=(8,8))
 
 s=fig.add_subplot(111, projection='3d')
-s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=50)
+s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)
 s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)
 mp.show()
 
