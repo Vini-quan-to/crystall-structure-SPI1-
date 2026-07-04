@@ -21,7 +21,7 @@ basis1_z=[]
 basis2_x=[]
 basis2_y=[]
 basis2_z=[]
-constant={}      # constant for the atom belonging the same layer
+layers={}      # constant for the atom belonging the same layer
 
 
 # INPUT FOR THE LATTICE CONSTANT AND THE NUMBER OF LATTICE POINTS IN THE X Y Z DIRECTION
@@ -90,21 +90,19 @@ for j in range(number_basis):
                 basis1_y.append(r1[1])
                 basis1_z.append(r1[2])
                 g=(h*b1 + k*b2 + l*b3)
+                # d=np.dot(g,r1)
+                # constant.update(d)
+                
                 d=np.dot(g,r1)
-                constant.update(d)
-                layers={}
-                d=np.dot(g,r1)
 
-                # d=round(d,5)
+                d=round(d,5)
 
-                # if d not in layers:
-                #     layers[d]=[]
+                if d not in layers:
+                    layers[d]=[]
 
-                # layers[d].append(r1)
+                layers[d].append(r1)
 
-                # for key,value in layers.items():
-                #     print("layer:",key)
-                #     print(value)
+              
                             
             
             
@@ -123,32 +121,38 @@ for j in range(number_basis):
                 #              basis2_y.append(r1[1])
                 #              basis2_z.append(r1[2])
             
-print(f' these are the constant for each layers  {constant}')             
+# print(f' these are the constant for each layers  {constant}')             
+
+for key,value in layers.items():
+    print("layer:",key)
+    print(value)
+
 
 print(layers.keys())
-layer_atoms = np.array(layers[0])
+layer_atoms = np.array(layers[list(layers.keys())[0]])  # Get the atoms in the first layer
+x = layer_atoms[:,0]
 y = layer_atoms[:,1]
 z = layer_atoms[:,2]
 
-mp.scatter(y,z)
+mp.figure(figsize=(6,6))
+
+mp.scatter(y,z,s=100)
+
 mp.xlabel("y")
 mp.ylabel("z")
+
+mp.grid()
+
 mp.show()
-
-
-
-
-
 
 # PLOT FOR THE LATTICE POINTS
 
-from mpl_toolkits.mplot3d import Axes3D
-fig = mp.figure(figsize=(8,8))
+# from mpl_toolkits.mplot3d import Axes3D
+# fig = mp.figure(figsize=(8,8))
 
-s=fig.add_subplot(111, projection='3d')
-s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
-# s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
-mp.show()
+# s=fig.add_subplot(111, projection='3d')
+# s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
+# # s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
 
     
 
