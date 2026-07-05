@@ -2,6 +2,7 @@
 #    lets start with genrealising the code for any lattice type
 # =================================================================
 
+from matplotlib.pylab import normal
 import numpy as np
 import matplotlib.pyplot as mp
 
@@ -109,33 +110,56 @@ for key,value in layers.items():
 
 print(layers.keys())
 
-# for i in range(number_layers):
-layer_atoms = np.array(layers[list(layers.keys())[0]])  # Get the atoms in the ith layer
-print(layer_atoms)
+fig = mp.figure(figsize=(12,5))
+ax1 = fig.add_subplot(121, projection="3d")
 
-fig, (ax1, ax2) = mp.subplots(1, 2, figsize=(10, 4))  
-ax1.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)
-ax2.scatter(y,z,s=100)
-mp.grid()
+ax1.scatter(basis1_x,basis1_y,basis1_z,s=70, color="blue")
+ax1.set_title("Complete Crystal")
 
+ax1.set_xlabel("x")
+ax1.set_ylabel("y")
+ax1.set_zlabel("z")
+
+normal = g / np.linalg.norm(g)
+temp = np.array([1,0,0])
+u = np.cross(normal,temp)
+u = u/np.linalg.norm(u)
+v = np.cross(normal,u)
+
+layer_atoms = np.array(layers[list(layers.keys())[0]])
+X =np.dot(layer_atoms, u)
+Y =np.dot(layer_atoms, v)
+ax2 = fig.add_subplot(122)
+ax2.scatter(X,Y,s=100)
 mp.show()
 
+# ax2 = fig.add_subplot(122)
+
+# ax2 = fig.add_subplot(122)
 
 
-# PLOT FOR THE LATTICE POINTS
-
-# from mpl_toolkits.mplot3d import Axes3D
-# fig = mp.figure(figsize=(8,8))
-
-# s=fig.add_subplot(111, projection='3d')
-# s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
-# # s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
-
-
-# x = layer_atoms[:,0]
-#     y = layer_atoms[:,1]
-#     # z = layer_atoms[:,2]
+# layer_atoms=np.array(layers[list(layers.keys())[0]])
 
 
 
+# layer_numbers = list(layers.keys())
 
+
+# for i in range(number_layers):
+
+#     layer_atoms = np.array(layers[layer_numbers[i]])
+
+#     ax2.scatter(
+#         layer_atoms[:,1],
+#         layer_atoms[:,2],
+#         s=100,
+#         label=f"layer {i}"
+#     )
+
+
+# ax2.set_xlabel("surface direction 1")
+# ax2.set_ylabel("surface direction 2")
+
+# ax2.legend()
+
+# mp.show()
