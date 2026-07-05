@@ -60,6 +60,8 @@ k=int(input("enter the miller  index  k :"))
 l=int(input("enter the miller  index  l :"))
 print(f' The given miller indices are {h} {k} {l} and the plane is {h} {k} {l}')
 
+# enter the number of layers to see the normal view of the crystall plane
+number_layers=int(input("enter the number of layers to see the normal view of the crystall plane:"))
 
 # USE THE FORMULA TO CALCULATE THE RECIPROCAL LATTICE VECTOR
 
@@ -90,60 +92,35 @@ for j in range(number_basis):
                 basis1_y.append(r1[1])
                 basis1_z.append(r1[2])
                 g=(h*b1 + k*b2 + l*b3)
-                # d=np.dot(g,r1)
-                # constant.update(d)
-                
+            
                 d=np.dot(g,r1)
 
                 d=round(d,5)
-
+                                                                                    #   this part of the code is used to make list of the atoms belonging to a particulatr layers
                 if d not in layers:
                     layers[d]=[]
 
                 layers[d].append(r1)
-
-              
-                            
             
-            
-                # for j in range(number_basis):
-                #         if j==0:
-                            
-                #             r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
-                #             basis1_x.append(r1[0])
-                #             basis1_y.append(r1[1])
-                #             basis1_z.append(r1[2])
-                            
-
-                #         else:
-                #              r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
-                #              basis2_x.append(r1[0])
-                #              basis2_y.append(r1[1])
-                #              basis2_z.append(r1[2])
-            
-# print(f' these are the constant for each layers  {constant}')             
 
 for key,value in layers.items():
     print("layer:",key)
     print(value)
 
-
 print(layers.keys())
-layer_atoms = np.array(layers[list(layers.keys())[0]])  # Get the atoms in the first layer
-x = layer_atoms[:,0]
-y = layer_atoms[:,1]
-z = layer_atoms[:,2]
 
-mp.figure(figsize=(6,6))
+# for i in range(number_layers):
+layer_atoms = np.array(layers[list(layers.keys())[0]])  # Get the atoms in the ith layer
+print(layer_atoms)
 
-mp.scatter(y,z,s=100)
-
-mp.xlabel("y")
-mp.ylabel("z")
-
+fig, (ax1, ax2) = mp.subplots(1, 2, figsize=(10, 4))  
+ax1.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)
+ax2.scatter(y,z,s=100)
 mp.grid()
 
 mp.show()
+
+
 
 # PLOT FOR THE LATTICE POINTS
 
@@ -154,9 +131,10 @@ mp.show()
 # s.scatter(basis1_x,basis1_y,basis1_z, color="blue",s=100)      # this for  the lattice point with basis [0 0 0]
 # # s.scatter(basis2_x,basis2_y,basis2_z,color="red",s=50)         # this for  the lattice point  for  thr rest of the basis 
 
-    
 
-
+# x = layer_atoms[:,0]
+#     y = layer_atoms[:,1]
+#     # z = layer_atoms[:,2]
 
 
 
