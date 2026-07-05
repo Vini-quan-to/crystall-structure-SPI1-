@@ -10,8 +10,8 @@ A Python tool for visualizing crystal structures and analyzing atomic layers.
 <hr>
 ALGORITHIM:
 Based on the inputs I have used the  mathematicla definition of the  crystall lattice based on the  given the  lattice vector which is like this:
-                        <h1> R=  n*a<sub>1</sub> + m*a<sub>2</sub> + p*a<sub>3</sub>
- then it will comei willl explain 
+                        <h1> R=  n*a<sub>1</sub> + m*a<sub>2</sub> + p*a<sub>3</sub> </h1>
+ then it will come I will explain 
 
 <hr>
 Refernce:
