@@ -1,7 +1,13 @@
-# crystall-structure-SPI1-
-This i have added my basic code to it I am working to make it in more generalise way as possible such that  i just have to take inputof any lattice vector and  the basis vector instead I will try to make
-it  in conventional lattice just ask basis  as input  and generate the desired crystall. 
- I am also working on the html and css in my local manny more thing is about to come 
- now I have generalised it but few changes are left 
+# crystall-structure-SPI1- 
+A Python tool for visualizing crystal structures and analyzing atomic layers.
+ Here in this  code i first alot of inputs tpo generate the lattice (set of infinite points  in 3-dimension with a  particular spacing that we called lattice constant ) . Then we take input about the size 
+ of the lattice we want i respective perpendicular direction   the me take the  lattice vector's to make  the particular lattice, once's this done the lattices get generated then we can add number of basis  and basis vector (is numbers/ location of an atom  w.r.t to particular lattice points  ) after all this   crystall  is generated 
+
+
+<img src="lattice image.jpg" alt=" example">
+
+Refernce:
+The image is from the following 
+<a href="https://kdkce.edu.in/writereaddata/fckimagefile/Unit%203%20Crysallography%20notes%20With%20Q-Ans-Problems.pdf" > click to view image resource </a>
 <br>
 Author-Vinit gupta
