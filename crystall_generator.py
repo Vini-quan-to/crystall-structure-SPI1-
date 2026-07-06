@@ -19,9 +19,9 @@ basis1_x=[]
 basis1_y=[]
 basis1_z=[]
 
-basis2_x=[]
-basis2_y=[]
-basis2_z=[]
+lattice_x=[]
+lattice_y=[] 
+lattice_z=[]
 layers={}      # constant for the atom belonging the same layer
 
 
@@ -85,9 +85,12 @@ for j in range(number_basis):
     for n in range(n1):
         for m in range(n2):
             for p in range(n3):
-                        
-                # r=(n*cl[0] + m*cl[1] + p*cl[2])
-                # lp.append(r)
+
+                r=(n*cl[0] + m*cl[1] + p*cl[2])
+                lattice_x.append(r[0])
+                lattice_y.append(r[1])
+                lattice_z.append(r[2])       
+                
                 r1=(n*cl[0] + m*cl[1] + p*cl[2]) + basis[j]
                 basis1_x.append(r1[0])
                 basis1_y.append(r1[1])
@@ -113,53 +116,55 @@ print(layers.keys())
 fig = mp.figure(figsize=(12,5))
 ax1 = fig.add_subplot(121, projection="3d")
 
-ax1.scatter(basis1_x,basis1_y,basis1_z,s=70, color="blue")
+ax1.scatter(basis1_x,basis1_y,basis1_z,s=70, color="red")
+ax1.scatter(lattice_x,lattice_y,lattice_z,s=70, color="blue")           #here  this part of for the plot of the lattice and the basis atom in the crystall structurec
 ax1.set_title("Complete Crystal")
 
 ax1.set_xlabel("x")
 ax1.set_ylabel("y")
 ax1.set_zlabel("z")
 
-normal = g / np.linalg.norm(g)
-temp = np.array([1,0,0])
-u = np.cross(normal,temp)
-u = u/np.linalg.norm(u)
-v = np.cross(normal,u)
 
-layer_atoms = np.array(layers[list(layers.keys())[0]])
-X =np.dot(layer_atoms, u)
-Y =np.dot(layer_atoms, v)
+layer_numbers = sorted(layers.keys())
+
+layer_atoms = np.array(layers[layer_numbers[1]])
+
+normal = g / np.linalg.norm(g)
+
+temp=np.array([1,0,0])
+
+u=np.cross(normal,temp)
+
+u=u/np.linalg.norm(u)
+
+v=np.cross(normal,u)
+v=v/np.linalg.norm(v)
+
+X=[]
+Y=[]
+
+
+for atom in layer_atoms:
+
+    x_new=np.dot(atom,u)
+    y_new=np.dot(atom,v)
+
+    X.append(x_new)
+    Y.append(y_new)
+
+
 ax2 = fig.add_subplot(122)
-ax2.scatter(X,Y,s=100)
+
+ax2.scatter(X,Y,s=70,label=f"layer {i}" )
+
+
+ax2.set_title(f"({h}{k}{l}) surface view")
+ax2.set_xlabel("surface direction 1")
+ax2.set_ylabel("surface direction 2")
+
 mp.show()
 
-# ax2 = fig.add_subplot(122)
-
-# ax2 = fig.add_subplot(122)
 
 
-# layer_atoms=np.array(layers[list(layers.keys())[0]])
+    
 
-
-
-# layer_numbers = list(layers.keys())
-
-
-# for i in range(number_layers):
-
-#     layer_atoms = np.array(layers[layer_numbers[i]])
-
-#     ax2.scatter(
-#         layer_atoms[:,1],
-#         layer_atoms[:,2],
-#         s=100,
-#         label=f"layer {i}"
-#     )
-
-
-# ax2.set_xlabel("surface direction 1")
-# ax2.set_ylabel("surface direction 2")
-
-# ax2.legend()
-
-# mp.show()
