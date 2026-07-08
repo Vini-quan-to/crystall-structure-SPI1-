@@ -113,54 +113,75 @@ for key,value in layers.items():
 
 print(layers.keys())
 
+
+# PLOTTING PART
+
+
 fig = mp.figure(figsize=(12,5))
+
 ax1 = fig.add_subplot(121, projection="3d")
 
-ax1.scatter(basis1_x,basis1_y,basis1_z,s=70, color="red")
-ax1.scatter(lattice_x,lattice_y,lattice_z,s=70, color="blue")           #here  this part of for the plot of the lattice and the basis atom in the crystall structurec
+ax1.scatter(basis1_x,basis1_y,basis1_z, s=70, color="red",label="atoms")
+
+ax1.scatter(lattice_x,lattice_y,lattice_z,s=70,color="blue",label="lattice")
+
 ax1.set_title("Complete Crystal")
 
 ax1.set_xlabel("x")
 ax1.set_ylabel("y")
 ax1.set_zlabel("z")
 
+ax1.legend()
+
+#  SURFACE VIEW ALONG MILLER NORMAL
 
 layer_numbers = sorted(layers.keys())
-
-layer_atoms = np.array(layers[layer_numbers[1]])
-
 normal = g / np.linalg.norm(g)
+random=np.array([1,2,3])
 
-temp=np.array([1,0,0])
-
-u=np.cross(normal,temp)
+u=np.cross(normal,random)
 
 u=u/np.linalg.norm(u)
 
 v=np.cross(normal,u)
+
 v=v/np.linalg.norm(v)
-
-X=[]
-Y=[]
-
-
-for atom in layer_atoms:
-
-    x_new=np.dot(atom,u)
-    y_new=np.dot(atom,v)
-
-    X.append(x_new)
-    Y.append(y_new)
-
 
 ax2 = fig.add_subplot(122)
 
-ax2.scatter(X,Y,s=70,label=f"layer {i}" )
+
+for i in range(number_layers):
+
+    layer_atoms=np.array(layers[layer_numbers[i]])
+
+    X=[]
+    Y=[]
+
+
+    for atom in layer_atoms:
+
+        x_new=np.dot(atom,u)
+        y_new=np.dot(atom,v)
+
+        X.append(x_new)
+        Y.append(y_new)
+
+
+
+    ax2.scatter(
+        X,
+        Y,
+        s=70,
+        label=f"layer {i}"
+    )
 
 
 ax2.set_title(f"({h}{k}{l}) surface view")
+
 ax2.set_xlabel("surface direction 1")
 ax2.set_ylabel("surface direction 2")
+
+ax2.legend()
 
 mp.show()
 
