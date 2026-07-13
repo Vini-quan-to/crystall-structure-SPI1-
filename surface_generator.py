@@ -1,5 +1,7 @@
 import numpy as np
 import matplotlib.pyplot as mp
+import random as r
+
 
 
 a=float(input("enter the lattice constant a :"))
@@ -58,20 +60,36 @@ g=(h*b1 + k*b2 + l*b3)
 
 print(f"  this is your  normal  vector {g}")
 
-for n in range(n1):
-    for m in range(n2):
-        for p in range(n3):
+for n in range(-n1, n1+1):
+    for m in range(-n2, n2+1):
+        for p in range(-n3, n3+1):
 
             r=(n*cl[0] + m*cl[1] + p*cl[2])
-            x=np.dot(g,r)
-            if x==0:
-                sp=np.array([n,m,p])
-                slv.append(sp)
+            x = np.dot(g, r)
+
+            if np.isclose(x,0):
+                 ui = n*a1 + m*a2 + p*a3
+
+                 if np.linalg.norm(ui) > 1e-8:
+                    slv.append(ui)
+                
+                
 print( f"  this are the  {slv}")
 
-u=np.array(slv[0])
-v=np.cross(g ,u)
-d= a/np.sqrt(h**2+ k**2 + l**2)
+
+slv.sort(key=np.linalg.norm)
+
+u = slv[0]
+
+
+
+normal = g / np.linalg.norm(g)
+
+v = np.cross(g, u)
+
+v = v / np.linalg.norm(v)
+
+d = 2*np.pi / np.linalg.norm(g)
 
 number_layers=int(input("enter the number of layer you want :"))
 
@@ -79,7 +97,7 @@ for n in range(n1):
     for m in range(n2):
         for p in range(number_layers):
 
-            s=n*u+ m*v + p*d
+            s=n*u+ m*v + p*d*normal
             spv.append(s)
             spv_x.append(s[0])
             spv_y.append(s[1])
@@ -91,13 +109,8 @@ fig = mp.figure(figsize=(6,5))
 
 ax = fig.add_subplot(121, projection="3d")
 
-ax.plot_surface(spv_x,spv_y,spv_z ,   cmap='viridis', edgecolor='none')
+ax.scatter(spv_x, spv_y, spv_z, s=50)
 
-
-ax.set_xlabel('X Axis')
-ax.set_ylabel('Y Axis')
-ax.set_zlabel('Z Axis')
-ax.set_title('3D Surface Plot')
 
 mp.show()
 
