@@ -116,7 +116,7 @@ rlv.extend([b1 ,b2 ,b3])
 
 #=====================================================================================================================================================================================================================================================================
 
-def crystall():
+def crystall(n1,n2 ,n3 ,cl,basis):
     for j in range(len(basis)):
         for n in range(n1):
             for m in range(n2):
@@ -132,7 +132,7 @@ def crystall():
                     basis1_y.append(r1[1])
                     basis1_z.append(r1[2])
 
-    fig = mp.figure(figsize=(12,5))
+    fig = mp.figure(figsize=(6,5))
 
     ax1 = fig.add_subplot(121, projection="3d")
 
@@ -152,7 +152,7 @@ def crystall():
 #=====================================================================================================================================================================================================================================================================
 
 
-def normal_view():
+def normal_view(n1,n2, n3, number_layers,cl,basis ,h,k,l):
     for j in range(len(basis)):
         for n in range(n1):
             for m in range(n2):
@@ -195,10 +195,9 @@ def normal_view():
     v=np.cross(normal,u)
 
     v=v/np.linalg.norm(v)
-    fig = mp.figure(figsize=(12,5))
+    fig = mp.figure(figsize=(6,5))
 
-    ax1 = fig.add_subplot(121, projection="3d")
-
+    ax = fig.add_subplot(121, projection="3d")
 
     for i in range(number_layers):
 
@@ -224,7 +223,7 @@ def normal_view():
 #=====================================================================================================================================================================================================================================================================
 
 
-def crystall_surface_view():
+def crystall_surface_view(n1,n2,n3,number_layers,cl,basis,h,k,l):
     for j in range(len(basis)):
          for n in range(n1):
              for m in range(n2):
@@ -321,6 +320,6 @@ whaat_to_plot=input("Enter your need  based on the above note :  ")
 if whaat_to_plot=="CRY":
     crystall(n1,n2 ,n3 ,cl,basis)
 elif whaat_to_plot=="NV":
-    normal_view(n1,n2, n3, number_basis,cl,basis ,h,k,l)
+    normal_view(n1,n2, n3, number_layers,cl,basis ,h,k,l)
 elif whaat_to_plot=="BOTH":
-    crystall_surface_view(n1,n2, n3, number_basis,cl,basis , h , k , l )
+    crystall_surface_view(n1,n2, n3, number_layers ,cl,basis , h , k , l )
