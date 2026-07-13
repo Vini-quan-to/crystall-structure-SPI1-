@@ -1,6 +1,5 @@
 import numpy as np
-import matplotlib as mp
-
+import matplotlib.pyplot as mp
 
 
 a=float(input("enter the lattice constant a :"))
@@ -11,7 +10,12 @@ n3=int(input("enter the number of lattice points in  the z direction:"))
 
 cl=[]
 rlv=[]
+slv=[]
 spv=[]
+spv_x=[]
+spv_y=[]
+spv_z=[]
+
 
 
 custom_conventional = input(" Enter the type of lattice you want conventional or custom:")
@@ -41,6 +45,8 @@ b3=(2*np.pi*(np.cross(a1,a2)))/v
                                                                                                            #  r=ms1​+ns2​+pdn^
 rlv.extend([b1 ,b2 ,b3])
 
+print(f"  this is your reciprocal lattice vector {rlv}")
+
 # INPUT FOR THE MILLER INDICES OF THE PLANES IN THE CRYSTALL
 
 h=int(input("enter the miller  index  h :"))
@@ -50,6 +56,8 @@ print(f' The given miller indices are {h} {k} {l} and the plane is {h} {k} {l}')
 
 g=(h*b1 + k*b2 + l*b3)
 
+print(f"  this is your  normal  vector {g}")
+
 for n in range(n1):
     for m in range(n2):
         for p in range(n3):
@@ -58,5 +66,39 @@ for n in range(n1):
             x=np.dot(g,r)
             if x==0:
                 sp=np.array([n,m,p])
-                spv.append(sp)
-print( f"  this are the  {spv}")
+                slv.append(sp)
+print( f"  this are the  {slv}")
+
+u=np.array(slv[0])
+v=np.cross(g ,u)
+d= a/np.sqrt(h**2+ k**2 + l**2)
+
+number_layers=int(input("enter the number of layer you want :"))
+
+for n in range(n1):
+    for m in range(n2):
+        for p in range(number_layers):
+
+            s=n*u+ m*v + p*d
+            spv.append(s)
+            spv_x.append(s[0])
+            spv_y.append(s[1])
+            spv_z.append(s[2])
+print(f" hello {spv}")
+
+
+fig = mp.figure(figsize=(6,5))
+
+ax = fig.add_subplot(121, projection="3d")
+
+ax.plot_surface(spv_x,spv_y,spv_z ,   cmap='viridis', edgecolor='none')
+
+
+ax.set_xlabel('X Axis')
+ax.set_ylabel('Y Axis')
+ax.set_zlabel('Z Axis')
+ax.set_title('3D Surface Plot')
+
+mp.show()
+
+
