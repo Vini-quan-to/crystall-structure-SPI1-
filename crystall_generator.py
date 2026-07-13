@@ -7,7 +7,7 @@ import numpy as np
 import matplotlib.pyplot as mp
 
 
-name=input("enter you good name pls:")
+name=str(input("enter you good name pls:"))
 print(f"welcome {name} generate your own world of crystalls")
 print("NOTE- THIS TO INFORM  YOU THAT FOR OUR SIMPLICITY WE HAVE WRITTEN X Y Z  FOR  THE DIRECTION BUT BASED ON  THE INPUT ANY LATTICE WITH THE BASIS CAN BE CREATED ")
 basis=[]
@@ -114,16 +114,10 @@ b3=(2*np.pi*(np.cross(a1,a2)))/v
 
 rlv.extend([b1 ,b2 ,b3])
 
-print(f" this are  your reciprocal lattice vector formed from the  given primitibe attice vector {rlv}")
-
-print("""=========================================================================================================""")
-print("NOTE: for just to  crystall(lattice + basis) enter the  (CRY) and for only normal veiw (NV) for both  crsytall and the normal view (BOTH)")
-print("""=========================================================================================================""")
-
 #=====================================================================================================================================================================================================================================================================
 
-def crystall(n1,n2 ,n3 ,cl,basis):
-    for j in range(number_basis):
+def crystall():
+    for j in range(len(basis)):
         for n in range(n1):
             for m in range(n2):
                 for p in range(n3):
@@ -158,8 +152,8 @@ def crystall(n1,n2 ,n3 ,cl,basis):
 #=====================================================================================================================================================================================================================================================================
 
 
-def normal_view(n1,n2, n3, number_basis,cl,basis ,h,k,l):
-    for j in range(number_basis):
+def normal_view():
+    for j in range(len(basis)):
         for n in range(n1):
             for m in range(n2):
                 for p in range(n3):
@@ -230,8 +224,8 @@ def normal_view(n1,n2, n3, number_basis,cl,basis ,h,k,l):
 #=====================================================================================================================================================================================================================================================================
 
 
-def crystall_surface_view(n1,n2, n3, number_basis,cl,basis , h , k , l ):
-    for j in range(number_basis):
+def crystall_surface_view():
+    for j in range(len(basis)):
          for n in range(n1):
              for m in range(n2):
                 for p in range(n3):
@@ -317,4 +311,16 @@ def crystall_surface_view(n1,n2, n3, number_basis,cl,basis , h , k , l ):
     ax2.legend()
 
     mp.show()
-    
+
+#================================================================================================================================================================================================================
+print("""=======================================================================================================================================================""")
+print("NOTE: for just to  crystall(lattice + basis) enter the  (CRY) and for only normal veiw (NV) for both  crystall(lattice + basis) and the normal view (BOTH)")
+print("""=========================================================================================================================================================""")
+
+whaat_to_plot=input("Enter your need  based on the above note :  ")
+if whaat_to_plot=="CRY":
+    crystall(n1,n2 ,n3 ,cl,basis)
+elif whaat_to_plot=="NV":
+    normal_view(n1,n2, n3, number_basis,cl,basis ,h,k,l)
+elif whaat_to_plot=="BOTH":
+    crystall_surface_view(n1,n2, n3, number_basis,cl,basis , h , k , l )
