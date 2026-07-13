@@ -137,7 +137,7 @@ ax1.legend()
 
 layer_numbers = sorted(layers.keys())
 normal = g / np.linalg.norm(g)
-random=np.array([1,2,3])
+random=np.array([1,0,0])
 
 u=np.cross(normal,random)
 
@@ -168,18 +168,12 @@ for i in range(number_layers):
 
 
 
-    ax2.scatter(
-        X,
-        Y,
-        s=70,
-        label=f"layer {i}"
-    )
+    ax2.scatter( X, Y, s=70, label=f"layer {i}" )
 
 
 ax2.set_title(f"({h}{k}{l}) surface view")
 
-ax2.set_xlabel("surface direction 1")
-ax2.set_ylabel("surface direction 2")
+
 
 ax2.legend()
 
