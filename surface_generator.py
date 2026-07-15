@@ -1,3 +1,7 @@
+# =================================================================
+#    surface lattice normal to the given miller indices
+# =================================================================
+
 import numpy as np
 import matplotlib.pyplot as mp
 import random as r
@@ -102,6 +106,7 @@ for n in range(n1):
             spv_x.append(s[0])
             spv_y.append(s[1])
             spv_z.append(s[2])
+
 print(f" hello {spv}")
 
 
