@@ -45,9 +45,9 @@ if custom_conventional=="con":
     cl.extend([a1,a2,a3])
 else:
     for i in range(3):
-        ax=int(input("enter the x-direction of your lattice vector:  "))
-        ay=int(input("enter the y-direction of your lattice vector:  "))
-        az=int(input("enter the z-direction of your lattice vector:  "))
+        ax=float(input("enter the x-direction of your lattice vector:  "))
+        ay=float(input("enter the y-direction of your lattice vector:  "))
+        az=float(input("enter the z-direction of your lattice vector:  "))
         a1=np.array([ax,ay,az])
         print(f'your given lattice vector {a1} is stored in the system')
         cl.append(a1)
@@ -178,18 +178,26 @@ print(f" hello {spv}")
 
 # this part is the plot
 
-fig = mp.figure(figsize=(6,5))
+fig = mp.figure(figsize=(12,5))
 
-ax = fig.add_subplot(121, projection="3d")
+ax1 = fig.add_subplot(121, projection="3d")
 
-ax.scatter(spv_x, spv_y, spv_z, s=50,color="blue",label="surface lattice points")
-ax.scatter(basis1_x,basis1_y,basis1_z, s=70, color="red",label="atoms")
-ax.set_xlabel("x")
-ax.set_ylabel("y")
-ax.set_zlabel("z")
-ax.legend()
+ax1.scatter(spv_x, spv_y, spv_z, s=50,color="black",label="surface lattice points")
+ax1.set_xlabel("x")
+ax1.set_ylabel("y")
+ax1.set_zlabel("z")
+ax1.legend()
 
-ax.set_title(f"({h}{k}{l}) surface view")
+ax2 = fig.add_subplot(122, projection="3d")
+
+ax2.scatter(basis1_x,basis1_y,basis1_z, s=70, color="red",label="atoms")
+ax2.scatter(spv_x, spv_y, spv_z, s=50,color="black",label="surface lattice points")
+ax2.set_xlabel("x")
+ax2.set_ylabel("y")
+ax2.set_zlabel("z")
+ax2.legend()
+
+ax2.set_title(f"({h}{k}{l}) surface view")
 
 mp.show()
 
