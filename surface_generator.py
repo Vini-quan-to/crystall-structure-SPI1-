@@ -144,11 +144,11 @@ u = slv[0]                                           # a vector in the surface  
 normal = g / np.linalg.norm(g)
 
 
-for x in slv[1:]:
-    cross = np.cross(u, x)
-    if np.linalg.norm(np.cross(u,x)) > 1e-8:
-        v = x
-        
+for vector in slv[1:]:
+    cross = np.cross(u, vector)
+    if np.linalg.norm(cross) > 1e-8:
+        v = vector
+        break
 
 print(f" this my v vector {v}")
 
@@ -170,9 +170,9 @@ for j in range(len(basis)):
 
                 sb= s + basis[j]
 
-                basis1_x.append[sb[0]]
-                basis1_y.append[sb[1]]
-                basis1_z.append[sb[2]]
+                basis1_x.append(sb[0])
+                basis1_y.append(sb[1])
+                basis1_z.append(sb[2])
 
 print(f" hello {spv}")
 
@@ -182,7 +182,7 @@ fig = mp.figure(figsize=(6,5))
 
 ax = fig.add_subplot(121, projection="3d")
 
-ax.scatter(spv_x, spv_y, spv_z, s=80,color="red",label="surface lattice points")
+ax.scatter(spv_x, spv_y, spv_z, s=50,color="blue",label="surface lattice points")
 ax.scatter(basis1_x,basis1_y,basis1_z, s=70, color="red",label="atoms")
 ax.set_xlabel("x")
 ax.set_ylabel("y")
