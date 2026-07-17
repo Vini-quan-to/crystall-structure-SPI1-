@@ -133,7 +133,9 @@ print(f"  this are the  {slv}")
 
 slv.sort(key=np.linalg.norm)
 
-u = slv[0]                                           # a vector in the surface perpendicular to g
+u = slv[0]    
+
+print(u)
 normal = g / np.linalg.norm(g)
 
 v = None
@@ -145,7 +147,7 @@ for vector in slv[1:]:
 
 print(f" this my v vector {v}")
 
-d = 2*np.pi / np.linalg.norm(g)                                             # interplaner distance between the plans 
+d = 2*np.pi/np.linalg.norm(g)                                             # interplaner distance between the plans 
           
 number_layers = int(input("enter the number of layer you want :"))
 
